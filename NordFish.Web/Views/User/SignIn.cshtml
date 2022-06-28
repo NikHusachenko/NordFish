@@ -1,0 +1,70 @@
+﻿<div class="login-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div class="tb-login-form ">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h5 class="tb-title">Login or <a href="@Url.Action("SignUp", "User")">Sign Up</a></h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5 id="errorLabel"></h5>
+                        </div>
+                    </div>
+                    <form action="#">
+                        <p class="checkout-coupon top log a-an">
+                            <label class="l-contact">
+                                Email Address
+                                <em>*</em>
+                            </label>
+                            <input type="email" id="email">
+                        </p>
+                        <p class="checkout-coupon top-down log a-an">
+                            <label class="l-contact">
+                                Password
+                                <em>*</em>
+                            </label>
+                            <input type="password" id="password">
+                        </p>
+                        <p class="login-submit5">
+                            <input class="button-primary" type="button" id="btn" value="login">
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+$("#btn").click(() => {
+    let data = {
+        email: $("#email").val(),
+        password: $("#password").val(),
+    };
+
+    let jsonData = JSON.stringify(data);
+    document.getElementById('errorLabel').innerHTML = "Please, wait...";
+
+    $.ajax({
+        url: '@Url.Action("SignIn", "User")',
+        method: 'post',
+        data: jsonData,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: (response) => {
+            location.href = response.responseMessage;
+        },
+        error: (response) => { 
+            document.getElementById('errorLabel').innerHTML = response.responseJSON.responseMessage;
+        },
+    });
+
+    setTimeout(() => {
+        document.getElementById('errorLabel').innerHTML = "";
+    }, 5000);
+});
+</script>

@@ -1,0 +1,4 @@
+﻿@using NordFish.Web.Views.Shared.Components.ProductItemComponent
+@using NordFish.Database.Entities
+@model ProductEntity
+@await Component.InvokeAsync(typeof(ProductItemComponent), Model)

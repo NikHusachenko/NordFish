@@ -1,0 +1,29 @@
+﻿@using NordFish.Web.Views.Shared.Components.ProductItemComponent
+@model ProductItemViewModel
+
+<div class="li-item" style="border: solid 1px">
+    <div class="col-md-2 col-lg-2"></div>
+    <div class="col-md-8 col-sm-8">
+        <div class="f-fix">
+            <div class="tb-beg">
+                <a href="#">@Model.Product.Name</a>
+            </div>
+            <div class="tb-product-wrap-price-rating">
+                <div class="tb-product-price font-noraure-3">
+                    <label>Price: @Model.Product.Price</label> <br>
+                    <label>Weight: @Model.Product.Weight</label> <br>
+                    <label>Type: @Model.Product.Type.ToString()</label> <br>
+                </div>
+            </div>
+            <br>
+            <label>Description</label>
+            <p class="desc">@Model.Product.Description</p>
+            <div class="last-cart ns">
+                @if(Model.IsAuthorize == true)
+                {
+                    <a class="las4" href="@Url.Action("Buy", "Product", new {@productId = @Model.Product.Id, @buyerId = @Model.BuyerId})">Add To Cart</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

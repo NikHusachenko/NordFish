@@ -1,0 +1,36 @@
+﻿@using NordFish.Web.Models.Product
+@model DetailsViewModel
+
+<section class="contact-img-area"></section>
+<section class="single-product-area sit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="cras">
+                            <div class="product-name">
+                                <h2>@Model.Product.Name</h2>
+                            </div>
+                            <p class="availability in-stock">
+                                Product price: @Model.Product.Price
+                            </p>
+                            <p class="availability in-stock2">
+                                Product type: @Model.Product.Type.ToString()
+                            </p>
+                            <div class="short-description">
+                                <p>@Model.Product.Description</p>
+                            </div>
+                            <div class="pre-box">
+                                <span class="special-price">$@Model.Product.Price</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>
+<section class="section-padding-top"></section>

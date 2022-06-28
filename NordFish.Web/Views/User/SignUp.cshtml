@@ -1,0 +1,77 @@
+﻿<div class="login-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-md-8">
+                <div class="tb-login-form res">
+                    <h5 class="tb-title">Create a new account or <a href="@Url.Action("SignIn", "User")">Login</a></h5>
+                    <div class="row mb-lg-5">
+                        <div class="col-lg-6">
+                            <p>Welcome! Create your new account here</p>
+                        </div>
+                        <div class="col-lg-6" id="errorContainer"></div>
+                    </div>
+                    <form>
+                        <p class="checkout-coupon top log a-an">
+                            <label class="l-contact">
+                                Login
+                                <em>*</em>
+                            </label>
+                            <input type="text" id="login">
+                        </p>
+                        <p class="checkout-coupon top log a-an">
+                            <label class="l-contact">
+                                Email Address
+                                <em>*</em>
+                            </label>
+                            <input type="email" id="email">
+                        </p>
+                        <p class="checkout-coupon top log a-an">
+                            <label class="l-contact">
+                                Password
+                                <em>*</em>
+                            </label>
+                            <input type="password" id="password">
+                        </p>
+                        <p class="login-submit5 ress">
+                            <input value="SignUp" class="button-primary" type="button" id="btn">
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+$("#btn").click(() => {
+    let data = {
+        login: $("#login").val(),
+        email: $("#email").val(),
+        password: $("#password").val(),
+    }
+
+    let jsonData = JSON.stringify(data);
+    document.getElementById('errorContainer').innerHTML = '<p id="errorLabel">Please, wait...</p>'
+
+    $.ajax({
+        url: '@Url.Action("SignUp", "User")',
+        method: 'post',
+        data: jsonData,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: (response) => {
+            location.href = response.responseMessage;
+        },
+        error: (response) => {
+            document.getElementById('errorLabel').innerHTML = response.responseJSON.responseMessage;
+        },
+    });
+
+    setTimeout(() => {
+        document.getElementById('errorLabel').remove();
+    }, 5000);
+});
+</script>

@@ -1,0 +1,75 @@
+﻿@using NordFish.Database.Entities
+@using NordFish.Web.Models.User
+@model CartViewModel
+
+<section class="contact-img-area"></section>
+<div class="shopping-cart-area nr-wish-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="s-cart-all">
+                    <div class="cart-form table-responsive">
+                        @if(Model.Products.Count == 0)
+                        {
+                            <h3>No one product</h3>
+                        }
+                        else
+                        {
+                            <table id="shopping-cart-table" class="data-table cart-table">
+                                <tr>
+                                    <th class="low1"></th>
+                                    <th class="low2">Product Name</th>
+                                    <th>Unit Price </th>
+                                    <th>Weight</th>
+                                    <th class="low5">Type</th>
+                                    <th></th>
+                                </tr>
+                                @foreach(ProductEntity product in Model.Products)
+                                {
+                                    <tr>
+                                        <td class="sop-icon1">
+                                            <a href="@Url.Action("CancelBuying", "Product", new {@id = @product.Id})">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                        <td class="cen">
+                                            <div class="tb-beg">
+                                                <a href="@Url.Action("Details", "Product", new {@id = @product.Id})">@product.Name</a>
+                                            </div>
+                                        </td>
+                                        <td class="sop-cart">
+                                            <div class="tb-product-price font-noraure-3">
+                                                <span class="amount">$@product.Price</span>
+                                            </div>
+                                        </td>
+                                        <td class="cen">
+                                            <span class="wishlist-in-stock">@product.Weight kg</span>
+                                        </td>
+                                        <td class="cen">
+                                            <span class="wishlist-in-stock">@product.Type.ToString()</span>
+                                        </td>
+                                        <td class="sop-cart">
+                                            <div class="tb-beg">
+                                                <a href="@Url.Action("Delete", "Product", new {@id = @product.Id})">Buy this</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6">
+                                            <div class="last-cart l-mrgn">
+                                                <a class="las4" href="@Url.Action("BuyAll", "User")">Buy all</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section-padding-top"></section>

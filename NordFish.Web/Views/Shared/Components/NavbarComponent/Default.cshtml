@@ -1,0 +1,44 @@
+﻿@using NordFish.Web.Views.Shared.Components.NavbarComponent
+@model NavbarViewModel
+
+<div class="row">
+	<div class="col-sm-12 col-md-12 static">
+		<div>
+			<div class="mainmenu clearfix hidden-sm hidden-xs">
+                <nav>
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Home")"><h3>NORD FISH<sup>тм</sup></h3></a></li>
+                        <li><a href="#">Shop</a>
+                            <ul>
+                                <li><a href="@Url.Action("Show", "Product")">All products</a></li>
+                                <li><a href="@Url.Action("Show", "Product", new { @typeId = 0})">Fish</a></li>
+                                <li><a href="@Url.Action("Show", "Product", new { @typeId = 1})">Seafood</a></li>
+                                <li><a href="@Url.Action("Show", "Product", new { @typeId = 2})">Conserve</a></li>
+                                @if(Model.IsAdmin == true)
+                                {
+                                    <li><a href="@Url.Action("Create", "Product")">Create new</a></li>
+                                    <li><a href="@Url.Action("Settings", "Product")">Product settings</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li><a href="shop.html">About us</a></li>
+                        <li><a href="blog.html">Contacts</a></li>
+                    </ul>
+                </nav>        
+            </div>
+            <div class="right-header re-right-header">
+                <ul>
+                    @if(Model.IsAuthorize == true)
+                    {
+                        <li><a href="@Url.Action("Cart", "User")"><i class="fa fa-shopping-cart"></i><span class="color1">@Model.CartLength</span></a></li>
+                        <li><a href="@Url.Action("SignOut", "User")">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("SignIn", "User")">Login</a></li>
+                    }
+                </ul>
+            </div>
+		</div>
+	</div>
+</div>
